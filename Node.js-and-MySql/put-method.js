@@ -37,6 +37,17 @@ app.put("/update", (req, res)=>{
   });
 });
 
+//PUT method using postman to send data.
+
+app.put("/update/:studentName", (req, res)=>{
+  // res.send("Working");
+  const data = [req.body.studentName, req.body.age, req.body.city,req.body.gender, req.params.studentName];
+  con.query("UPDATE students SET studentName = ?, age = ?, city = ?, gender = ? where studentName = ?", data, (err, result, field)=>{
+    if(err) throw err;
+    res.send(result);
+  });
+});
+
 app.listen(5000);
 
 // con.query("", (err, result)=>{
